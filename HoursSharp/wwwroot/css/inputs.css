@@ -1,0 +1,48 @@
+.hour-form {
+    display: block;
+    margin: 1rem 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 3px;
+    table-layout: auto;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.form-date {
+    width: 1%;
+}
+
+td input {
+    width: 100%;
+    padding: 0.25rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.hour-input {
+    width: 15%;
+    text-align: center;
+}
+
+.description-input input {
+    width: 100%;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}

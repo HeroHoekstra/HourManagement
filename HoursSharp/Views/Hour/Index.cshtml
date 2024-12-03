@@ -1,0 +1,74 @@
+@{
+    ViewData["title"] = $"Uren brief {ViewData["currentMonth"]}/{ViewData["currentYear"]}";
+
+    TimeSheet? timeSheet = ViewData["timeSheet"] as TimeSheet;
+    if (timeSheet == null)
+    {
+        ViewData["errorMessage"] = "bad abasd";
+    }
+    
+    var daysInMonth = Convert.ToInt32(ViewData["daysInMonth"]);
+}
+
+<div>
+    @if (ViewData["errorMessage"] != null)
+    {
+        <div>
+            @ViewData["errorMessage"]
+        </div>
+    }
+
+    <form 
+        action="/api/hour/@timeSheet.Id"
+        method="post"
+        class="hour-form"
+        id="hourForm"
+    >
+        <table>
+            <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Extra uren</th>
+                <th>Gewerkte uren</th>
+                <th>Omschrijving</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @for (var i = 0; i <= daysInMonth; i++)
+            {
+                <tr class="hour-input-wrapper">
+                    <!-- Date -->
+                    <td class="form-date">
+                        @(i + 1)/@ViewData["currentMonth"]/@ViewData["currentYear"]
+                    </td>
+
+                    <!-- Extra hours -->
+                    <td class="hour-input">
+                        <input
+                            type="number"
+                            name=@($"sheetDays[{i}].ExtraHour")
+                            value="1" />
+                    </td>
+
+                    <!-- Hours -->
+                    <td class="hour-input">
+                        <input
+                            type="number"
+                            name=@($"sheetDays[{i}].Hour") />
+                    </td>
+
+                    <!-- Description -->
+                    <td class="description-input">
+                        <input
+                            type="text"
+                            name=@($"sheetDays[{i}].Description") />
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        
+        <input type="submit"/>
+    </form>
+</div>
