@@ -8,18 +8,24 @@ namespace HoursSharp.Controllers;
 public class HourController : Controller
 {
     private readonly TimeSheetRepository _tsRepository;
+    private readonly SheetDayRepository _dayRepository;
     private readonly UserRepository _userRepository;
 
-    public HourController(TimeSheetRepository tsRepository, UserRepository userRepository)
+    public HourController
+    (
+        TimeSheetRepository tsRepository, 
+        SheetDayRepository dayRepository,
+        UserRepository userRepository
+    )
     {
         _tsRepository = tsRepository;
+        _dayRepository = dayRepository;
         _userRepository = userRepository;
     }
     
     [HttpGet("/hour")]
     public IActionResult Index()
     {
-        ViewData["daysInMonth"] = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
         ViewData["currentMonth"] = DateTime.Now.ToString("MM");
         ViewData["currentYear"] = DateTime.Now.Year;
 
@@ -33,7 +39,11 @@ public class HourController : Controller
         User user = _userRepository.GetById<User>("0");
         if (user != null)
         {
-            ViewData["timeSheet"] = _tsRepository.GetByUserYearAndMonth(user.Id, DateTime.Now.Year, DateTime.Now.Month);
+            TimeSheet? timeSheet = _tsRepository.GetByUserYearAndMonth(user.Id, DateTime.Now.Year, DateTime.Now.Month);
+            List<SheetDay> sheetDays = _dayRepository.GetByTimeSheetId(timeSheet.Id);
+
+            ViewData["timeSheet"] = timeSheet;
+            ViewData["sheetDays"] = sheetDays;
         }
         
         return View();
@@ -73,8 +83,18 @@ public class HourController : Controller
     }
 
     [HttpPost("api/hour/{id}")]
-    public IActionResult Update([FromBody] SheetDay[] sheetDays, string id)
+    public IActionResult Update([FromForm] SheetDay[] sheetDays, string id)
     {
-        return RedirectToAction("Index");
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        if (sheetDays.Length == 0)
+        {
+            return BadRequest("SheetDays array is empty!");
+        }
+
+        return Ok(sheetDays);
     }
 }

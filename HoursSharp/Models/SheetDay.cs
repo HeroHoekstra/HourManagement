@@ -9,6 +9,8 @@ public class SheetDay : IModel
     public float Hours { get; set; }
     public float ExtraHours { get; set; }
     
+    public string? Description { get; set; }
+    
     public string TimeSheetId { get; set; }
     public TimeSheet TimeSheet { get; set; }
 }

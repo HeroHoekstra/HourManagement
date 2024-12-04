@@ -2,12 +2,13 @@
     ViewData["title"] = $"Uren brief {ViewData["currentMonth"]}/{ViewData["currentYear"]}";
 
     TimeSheet? timeSheet = ViewData["timeSheet"] as TimeSheet;
+    List<SheetDay> sheetDays = ViewData["sheetDays"] as List<SheetDay>;
     if (timeSheet == null)
     {
         ViewData["errorMessage"] = "bad abasd";
     }
-    
-    var daysInMonth = Convert.ToInt32(ViewData["daysInMonth"]);
+
+    int cDay = 0;
 }
 
 <div>
@@ -21,50 +22,52 @@
     <form 
         action="/api/hour/@timeSheet.Id"
         method="post"
-        class="hour-form"
-        id="hourForm"
-    >
-        <table>
-            <thead>
-            <tr>
-                <th>Datum</th>
-                <th>Extra uren</th>
-                <th>Gewerkte uren</th>
-                <th>Omschrijving</th>
-            </tr>
-            </thead>
+        class="hour-form">
+    <table>
+    <thead>
+    <tr>
+        <th>Datum</th>
+        <th>Extra uren</th>
+        <th>Gewerkte uren</th>
+        <th>Omschrijving</th>
+    </tr>
+    </thead>
 
-            <tbody>
-            @for (var i = 0; i <= daysInMonth; i++)
+    <tbody>
+    @foreach (SheetDay sheetDay in sheetDays)
             {
                 <tr class="hour-input-wrapper">
                     <!-- Date -->
                     <td class="form-date">
-                        @(i + 1)/@ViewData["currentMonth"]/@ViewData["currentYear"]
+                        @sheetDay.Date.ToString("dd/MM/yy")
                     </td>
 
                     <!-- Extra hours -->
                     <td class="hour-input">
                         <input
                             type="number"
-                            name=@($"sheetDays[{i}].ExtraHour")
-                            value="1" />
+                            name=@($"sheetDays[{cDay}].ExtraHour")
+                            value="@($"{sheetDay.ExtraHours}")"/>
                     </td>
 
                     <!-- Hours -->
                     <td class="hour-input">
                         <input
                             type="number"
-                            name=@($"sheetDays[{i}].Hour") />
+                            name=@($"sheetDays[{cDay}].Hour")
+                            value="@($"{sheetDay.Hours}")"/>
                     </td>
 
                     <!-- Description -->
                     <td class="description-input">
                         <input
                             type="text"
-                            name=@($"sheetDays[{i}].Description") />
+                            name=@($"sheetDays[{cDay}].Description")
+                            value=""/>
                     </td>
                 </tr>
+                
+                @(cDay++)
             }
             </tbody>
         </table>

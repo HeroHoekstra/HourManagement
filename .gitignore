@@ -1,0 +1,10 @@
+.git/
+.github/
+.idea/
+
+HoursSharp/obj/
+HoursSharp/bin/
+
+*.db
+*.db-shm
+*.db-wal

@@ -14,6 +14,9 @@ public class SheetDayRepository : Repository
     // Fetching
     public List<SheetDay> GetByTimeSheetId(string id)
     {
-        return _dbContext.SheetDays.Where(d => d.TimeSheetId == id).ToList();
+        return _dbContext.Set<SheetDay>()
+            .Where(s => s.TimeSheetId == id)
+            .OrderBy(s => s.Date)
+            .ToList();
     }
 }

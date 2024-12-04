@@ -3139,26 +3139,27 @@
     ]
   },
   "packageFolders": {
-    "/home/hero/.nuget/packages/": {}
+    "C:\\Users\\herok\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/hero/Programming/Personal/HoursSharp/HoursSharp/HoursSharp.csproj",
+      "projectUniqueName": "C:\\Users\\herok\\OneDrive\\Documenten\\HourManagement\\HoursSharp\\HoursSharp.csproj",
       "projectName": "HoursSharp",
-      "projectPath": "/home/hero/Programming/Personal/HoursSharp/HoursSharp/HoursSharp.csproj",
-      "packagesPath": "/home/hero/.nuget/packages/",
-      "outputPath": "/home/hero/Programming/Personal/HoursSharp/HoursSharp/obj/",
+      "projectPath": "C:\\Users\\herok\\OneDrive\\Documenten\\HourManagement\\HoursSharp\\HoursSharp.csproj",
+      "packagesPath": "C:\\Users\\herok\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\herok\\OneDrive\\Documenten\\HourManagement\\HoursSharp\\obj\\",
       "projectStyle": "PackageReference",
-      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
-        "/home/hero/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\herok\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "/usr/lib/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3175,8 +3176,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
-      }
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -3216,7 +3218,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
