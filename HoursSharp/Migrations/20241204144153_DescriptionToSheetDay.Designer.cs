@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoursSharp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241204122826_AddDescriptionSheetDay")]
-    partial class AddDescriptionSheetDay
+    [Migration("20241204144153_DescriptionToSheetDay")]
+    partial class DescriptionToSheetDay
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,6 @@ namespace HoursSharp.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<float>("ExtraHours")

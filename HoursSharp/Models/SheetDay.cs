@@ -12,5 +12,5 @@ public class SheetDay : IModel
     public string? Description { get; set; }
     
     public string TimeSheetId { get; set; }
-    public TimeSheet TimeSheet { get; set; }
+    public TimeSheet? TimeSheet { get; set; }
 }
