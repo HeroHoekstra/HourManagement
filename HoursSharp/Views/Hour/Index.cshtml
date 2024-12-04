@@ -3,75 +3,94 @@
 
     TimeSheet? timeSheet = ViewData["timeSheet"] as TimeSheet;
     List<SheetDay> sheetDays = ViewData["sheetDays"] as List<SheetDay>;
-    if (timeSheet == null)
-    {
-        ViewData["errorMessage"] = "bad abasd";
-    }
-
-    int cDay = 0;
 }
 
-<div>
+<div class="hour-form-wrapper">
     @if (ViewData["errorMessage"] != null)
     {
-        <div>
-            @ViewData["errorMessage"]
+        <div class="message error">
+            <b>@ViewData["errorMessage"]</b>
         </div>
     }
 
     <form 
-        action="/api/hour/@timeSheet.Id"
+        action="/api/hour/update"
         method="post"
-        class="hour-form">
-    <table>
-    <thead>
-    <tr>
-        <th>Datum</th>
-        <th>Extra uren</th>
-        <th>Gewerkte uren</th>
-        <th>Omschrijving</th>
-    </tr>
-    </thead>
+        class="hour-form"
+        id="hourForm">
+        <table>
+            <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Extra uren</th>
+                <th>Gewerkte uren</th>
+                <th>Omschrijving</th>
+            </tr>
+            </thead>
 
-    <tbody>
-    @foreach (SheetDay sheetDay in sheetDays)
+            <tbody>
+            @for(int i = 0; i < sheetDays.Count; i++)
             {
                 <tr class="hour-input-wrapper">
                     <!-- Date -->
                     <td class="form-date">
-                        @sheetDay.Date.ToString("dd/MM/yy")
+                        @sheetDays[i].Date.ToString("dd/MM/yy")
                     </td>
 
-                    <!-- Extra hours -->
                     <td class="hour-input">
                         <input
                             type="number"
-                            name=@($"sheetDays[{cDay}].ExtraHour")
-                            value="@($"{sheetDay.ExtraHours}")"/>
+                            step="1"
+                            name=@($"sheetDays[{i}].ExtraHours")
+                            value="@(sheetDays[i].ExtraHours)" />
                     </td>
 
-                    <!-- Hours -->
                     <td class="hour-input">
                         <input
                             type="number"
-                            name=@($"sheetDays[{cDay}].Hour")
-                            value="@($"{sheetDay.Hours}")"/>
+                            step="1"
+                            max="24"
+                            name=@($"sheetDays[{i}].Hours")
+                            value="@(sheetDays[i].Hours)" />
                     </td>
 
                     <!-- Description -->
                     <td class="description-input">
                         <input
                             type="text"
-                            name=@($"sheetDays[{cDay}].Description")
-                            value=""/>
+                            name=@($"sheetDays[{i}].Description")
+                            value="@(sheetDays[i].Description ?? "")"/>
                     </td>
+                        
+                    <!-- Hidden -->
+                    <input 
+                        type="hidden"
+                        name=@($"sheetDays[{i}].Id")
+                        value="@(sheetDays[i].Id)"/>
+                    <input 
+                        type="hidden"
+                        name=@($"sheetDays[{i}].TimeSheetId")
+                        value="@(sheetDays[i].TimeSheetId)"/>
+                    <input 
+                        type="hidden"
+                        name=@($"sheetDays[{i}].Date")
+                        value="@(sheetDays[i].Date.ToString("yyyy-MM-dd"))"/>
                 </tr>
-                
-                @(cDay++)
             }
             </tbody>
         </table>
-        
-        <input type="submit"/>
     </form>
+
+    <div class="form-buttons">
+        <input
+            type="submit"
+            value="Annuleren"
+            class="button cancel"
+            onclick="window.location.href='../'"/>
+        <input
+            type="submit"
+            value="Invoeren"
+            class="button submit"
+            onclick="document.getElementById('hourForm').submit()"/>
+    </div>
 </div>

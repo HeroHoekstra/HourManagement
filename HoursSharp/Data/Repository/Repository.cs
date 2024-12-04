@@ -35,4 +35,22 @@ public abstract class Repository
         
         return entityEntry.Entity;
     }
+    
+    // Update
+    public T? PutItem<T>(T item) where T : class, IModel
+    {
+        T? oldItem = GetById<T>(item.Id);
+        if (oldItem == null)
+        {
+            return null;
+        }
+
+        _dbContext.Entry(oldItem).CurrentValues.SetValues(item);
+        
+        _dbContext.Entry(oldItem).State = EntityState.Modified;
+        
+        _dbContext.SaveChanges();
+        
+        return oldItem;
+    }
 }

@@ -82,19 +82,19 @@ public class HourController : Controller
         return RedirectToAction("Index");
     }
 
-    [HttpPost("api/hour/{id}")]
-    public IActionResult Update([FromForm] SheetDay[] sheetDays, string id)
+    [HttpPost("api/hour/update")]
+    public IActionResult Update([FromForm] SheetDay[] sheetDays)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        if (sheetDays.Length == 0)
+        foreach (SheetDay sheetDay in sheetDays)
         {
-            return BadRequest("SheetDays array is empty!");
+            _userRepository.PutItem(sheetDay);
         }
 
-        return Ok(sheetDays);
+        return RedirectToAction("Index", "Home");
     }
 }

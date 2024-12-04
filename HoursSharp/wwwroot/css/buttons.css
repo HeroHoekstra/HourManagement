@@ -1,0 +1,16 @@
+.button {
+    padding: 4px 6px;
+    
+    border: none;
+    border-radius: 4px;
+    
+    font-weight: bold;
+}
+
+.button.submit {
+    background-color: lightgreen;
+}
+
+.button.cancel {
+    background-color: tomato;
+}

@@ -1,0 +1,23 @@
+.message {
+    position: absolute;
+    top: -500px;
+    
+    padding: 4px 6px;
+    
+    border-radius: 4px;
+    
+    animation: MessageAnimation 3s;
+}
+
+.error {
+    background-color: tomato;
+}
+
+@keyframes MessageAnimation {
+    0%, 100% {
+        top: -500px;
+    }
+    20%, 70% {
+        top: 75px;
+    }
+}
