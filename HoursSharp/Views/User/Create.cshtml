@@ -1,0 +1,66 @@
+﻿@{
+    
+}
+
+<div class="form-wrapper">
+    <form
+        action="/api/user/create"
+        method="post"
+        id="form">
+        <table>
+            <thead>
+                <tr>
+                    <th>Voornaam</th>
+                    <th>Volgnaam</th>
+                    <th>Achternaam</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <tr>
+                    <td>
+                        <input
+                            type="text"
+                            name="FirstName"/>
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            name="Infix"/>
+                    </td>
+                    <td>
+                        <input
+                            type="text"
+                            name="LastName"/>
+                    </td>
+                    <td>
+                        <input
+                            type="email"
+                            name="Email"/>
+                    </td>
+                    
+                    <td>
+                        <input
+                            type="password"
+                            name="Password"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="form-buttons">
+        <input
+            type="submit"
+            value="Annuleren"
+            class="button cancel"
+            onclick="window.location.href='../'"/>
+        <input
+            type="submit"
+            value="Invoeren"
+            class="button submit"
+            onclick="document.getElementById('form').submit()"/>
+    </div>
+</div>

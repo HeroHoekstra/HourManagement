@@ -92,7 +92,7 @@ public class HourController : Controller
 
         foreach (SheetDay sheetDay in sheetDays)
         {
-            _userRepository.PutItem(sheetDay);
+            _dayRepository.PutItem(sheetDay);
         }
 
         return RedirectToAction("Index", "Home");

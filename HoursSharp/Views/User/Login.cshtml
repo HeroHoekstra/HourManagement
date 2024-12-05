@@ -1,0 +1,26 @@
+﻿@{
+    
+}
+
+<div class="form-wrapper">
+    @if (ViewData["errorMessage"] != null)
+    {
+        <div class="message error">
+            <b>@ViewData["errorMessage"]</b>
+        </div>
+    }
+    
+    <form
+        action="/api/login"
+        method="post">
+        <input
+            type="email"
+            name="Email"/>
+
+        <input
+            type="password"
+            name="Password"/>
+
+        <input type="submit"/>
+    </form>
+</div>

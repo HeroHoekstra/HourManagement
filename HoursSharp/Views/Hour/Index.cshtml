@@ -5,7 +5,7 @@
     List<SheetDay> sheetDays = ViewData["sheetDays"] as List<SheetDay>;
 }
 
-<div class="hour-form-wrapper">
+<div class="form-wrapper">
     @if (ViewData["errorMessage"] != null)
     {
         <div class="message error">
@@ -16,7 +16,6 @@
     <form 
         action="/api/hour/update"
         method="post"
-        class="hour-form"
         id="hourForm">
         <table>
             <thead>

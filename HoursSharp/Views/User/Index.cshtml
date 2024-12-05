@@ -1,0 +1,35 @@
+﻿@{
+    List<User>? users = ViewData["users"] as List<User>;
+}
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Email</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @if (users == null || !users.Any())
+            {
+                <tr>
+                    <i>Er zijn geen gebruikers</i>
+                </tr>
+            }
+            else
+            {
+                @foreach (User user in users)
+                {
+                    <tr>
+                        <td>@(user.FullName())</td>
+                        <td>@(user.Email)</td>
+                        <td><i>Not yet implemented</i></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
