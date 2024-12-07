@@ -10,4 +10,9 @@ public class TimeSheet : IModel
 
     public string UserId { get; set; }
     public User User { get; set; }
+
+    public void PrintName()
+    {
+        Console.WriteLine(User.FullName());
+    }
 }

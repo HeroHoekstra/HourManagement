@@ -14,6 +14,7 @@ builder.Services.AddScoped<TimeSheetRepository>();
 builder.Services.AddScoped<SheetDayRepository>();
 builder.Services.AddScoped<UserRepository>();
 
+builder.Services.AddScoped<TimeSheetService>();
 builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();

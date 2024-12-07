@@ -5,12 +5,31 @@
     border-radius: 4px;
     
     font-weight: bold;
+    color: black;
+    
+    transition-duration: 0.3s;
 }
 
 .button.submit {
-    background-color: lightgreen;
+    background-color: #90ee90;
+}
+.button.submit:hover {
+    background-color: #81d881;
 }
 
 .button.cancel {
-    background-color: tomato;
+    background-color: #ff6347;
+}
+.button.cancel:hover {
+    background-color: #e85c41;
+}
+
+.button.download {
+    background-color: #97a6b8;
+}
+.button.download:hover {
+    background-color: #8b97a6;
+}
+.button.download>span {
+    vertical-align: top;
 }

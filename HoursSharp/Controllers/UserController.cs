@@ -49,6 +49,7 @@ public class UserController : Controller
         return RedirectToAction("Index");
     }
 
+    
     [HttpGet("login")]
     public IActionResult LoginPage()
     {
@@ -80,5 +81,13 @@ public class UserController : Controller
         Response.Cookies.Append("LoggedIn", userId, cookieOptions);
         
         return RedirectToAction("Index", "Home");
+    }
+
+    [HttpGet("/api/logout")]
+    public IActionResult Logout()
+    {
+        Response.Cookies.Delete("LoggedIn");
+        
+        return RedirectToAction("LoginPage");
     }
 }

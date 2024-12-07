@@ -1,8 +1,10 @@
 @{
-    ViewData["title"] = $"Uren brief {ViewData["currentMonth"]}/{ViewData["currentYear"]}";
+    ViewData["title"] = $"Uren brief {ViewData["month"]}/{ViewData["year"]}";
 
     TimeSheet? timeSheet = ViewData["timeSheet"] as TimeSheet;
-    List<SheetDay> sheetDays = ViewData["sheetDays"] as List<SheetDay>;
+    List<SheetDay>? sheetDays = ViewData["sheetDays"] as List<SheetDay>;
+
+    int? day = ViewData["day"] as int?;
 }
 
 <div class="form-wrapper">
@@ -14,9 +16,9 @@
     }
 
     <form 
-        action="/api/hour/update"
+        action="/api/timesheet/update"
         method="post"
-        id="hourForm">
+        id="form">
         <table>
             <thead>
             <tr>
@@ -30,7 +32,8 @@
             <tbody>
             @for(int i = 0; i < sheetDays.Count; i++)
             {
-                <tr class="hour-input-wrapper">
+                <tr 
+                    class="hour-input-wrapper">
                     <!-- Date -->
                     <td class="form-date">
                         @sheetDays[i].Date.ToString("dd/MM/yy")
@@ -81,6 +84,11 @@
     </form>
 
     <div class="form-buttons">
+        <a
+            href="/api/pdf/download/@(timeSheet.Id)"
+            class="button download">
+            <span class="material-symbols-rounded">download</span>
+        </a>
         <input
             type="submit"
             value="Annuleren"
@@ -90,6 +98,6 @@
             type="submit"
             value="Invoeren"
             class="button submit"
-            onclick="document.getElementById('hourForm').submit()"/>
+            onclick="document.getElementById('form').submit()"/>
     </div>
 </div>

@@ -8,10 +8,16 @@ namespace HoursSharp.Controllers;
 public class HomeController : Controller
 {
     private readonly TimeSheetRepository _tsRepository;
+    private readonly SheetDayRepository _dayRepository;
+    
+    private readonly TimeSheetService _tsService;
 
-    public HomeController(TimeSheetRepository tsRepository)
+    public HomeController(TimeSheetRepository tsRepository, SheetDayRepository dayRepository, TimeSheetService tsService)
     {
         _tsRepository = tsRepository;
+        _dayRepository = dayRepository;
+        
+        _tsService = tsService;
     }
     
     public IActionResult Index()
@@ -19,11 +25,11 @@ public class HomeController : Controller
         string? loggedIn = Request.Cookies["LoggedIn"];
         if (loggedIn == null)
         {
-            return RedirectToAction("Login", "User");
+            return RedirectToAction("LoginPage", "User");
         }
 
-        List<TimeSheet> timeSheets = _tsRepository.GetByUser(loggedIn);
-        ViewData["timeSheets"] = timeSheets;
+        ViewData["timeSheets"] = _tsService.GetTimeSheetWithDays(loggedIn);
+        ViewData["totalHours"] = _tsService.getTimeSheetHours(loggedIn);
         
         return View();
     }

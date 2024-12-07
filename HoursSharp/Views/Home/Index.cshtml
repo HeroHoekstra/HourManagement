@@ -1,7 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    Dictionary<TimeSheet, List<SheetDay>>? timeSheets = ViewData["timeSheets"] as Dictionary<TimeSheet, List<SheetDay>>;
+    Dictionary<TimeSheet, float>? totalHours = ViewData["totalHours"] as Dictionary<TimeSheet, float>;
 }
 
-<form method="post" action="/api/hour">
+@foreach (KeyValuePair<TimeSheet, List<SheetDay>> entry in timeSheets)
+{
+    <a
+        href="/timesheet/@(entry.Key.Id)"
+        class="timesheet-link">
+        <span>
+            
+        </span>
+        <span>
+            @(entry.Key.Date.Month)/@(entry.Key.Date.Year)
+        </span>
+        <span>
+            Totaal aantal uren: @(totalHours[entry.Key])
+        </span>
+    </a>
+}
+
+<form method="post" action="/api/timesheet">
     <button>Create for this month</button>
 </form>
