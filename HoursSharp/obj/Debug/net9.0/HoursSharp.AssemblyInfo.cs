@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HoursSharp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+257111f4760f2d057408997a47e8d0677e4eadc8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5af184e800bc61c873e958a545396f70f07883f")]
 [assembly: System.Reflection.AssemblyProductAttribute("HoursSharp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HoursSharp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

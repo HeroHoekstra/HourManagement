@@ -25,10 +25,9 @@ public class PDFController : Controller
         _tsService = tsService;
     }
     
-    [HttpGet("/api/pdf/download/{id}")]
-    public IActionResult Download(string id)
+    [HttpPost("/api/pdf/download/{id}")]
+    public IActionResult Download([FromForm] SheetDay[] sheetDays, string id)
     {
-        List<SheetDay> sheetDays = _dayRepository.GetByTimeSheetId(id);
         List<float> totalHours = _tsService.getHours(id);
         User? user = _tsRepository.GetUser(id);
         

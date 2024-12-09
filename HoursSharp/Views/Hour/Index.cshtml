@@ -84,11 +84,11 @@
     </form>
 
     <div class="form-buttons">
-        <a
-            href="/api/pdf/download/@(timeSheet.Id)"
-            class="button download">
+        <button 
+            class="button download"
+            onclick="submit()">
             <span class="material-symbols-rounded">download</span>
-        </a>
+        </button>
         <input
             type="submit"
             value="Annuleren"
@@ -101,3 +101,11 @@
             onclick="document.getElementById('form').submit()"/>
     </div>
 </div>
+
+<script>
+    const submit = () => {
+        let form = document.getElementById('form');
+        form.action = '../api/pdf/download/@(timeSheet.Id)';
+        form.submit();
+    }
+</script>
