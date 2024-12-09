@@ -1,4 +1,5 @@
 using HoursSharp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HoursSharp.Data.Repository;
 
@@ -56,6 +57,16 @@ public class TimeSheetRepository : Repository
             .ToList()
             .FirstOrDefault();
     }
+
+    public User? GetUser(string id)
+    {
+        var timeSheet = _dbContext.Set<TimeSheet>()
+            .Include(t => t.User)
+            .FirstOrDefault(t => t.Id == id);
+
+        return timeSheet?.User;
+    }
+
     
     // Post
     public TimeSheet CreateSheetWithDays(TimeSheet timeSheet)

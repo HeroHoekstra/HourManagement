@@ -30,6 +30,7 @@ public class PDFController : Controller
     {
         List<SheetDay> sheetDays = _dayRepository.GetByTimeSheetId(id);
         List<float> totalHours = _tsService.getHours(id);
+        User? user = _tsRepository.GetUser(id);
         
         using var memoryStream = new MemoryStream();
         using (var writer = new PdfWriter(memoryStream))
@@ -39,6 +40,8 @@ public class PDFController : Controller
             
             var normal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             var bold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+
+            document.Add(new Paragraph($"Uren brief {sheetDays[0].Date.ToString("MM/yy")} - {user.FullName()}"));
 
             document.SetFontSize(8);
             
@@ -54,9 +57,12 @@ public class PDFController : Controller
 
             foreach (SheetDay sheetDay in sheetDays)
             {
+                string extraHours = sheetDay.ExtraHours == 0 ? "" : $"{sheetDay.ExtraHours}";
+                string hours = sheetDay.Hours == 0 ? "" : $"{sheetDay.Hours}";
+                
                 table.AddCell(sheetDay.Date.ToString("dd/MM/yyyy"));
-                table.AddCell($"{sheetDay.ExtraHours}");
-                table.AddCell($"{sheetDay.Hours}");
+                table.AddCell(extraHours);
+                table.AddCell(hours);
                 table.AddCell($"{sheetDay.Description}");
             }
             
@@ -78,6 +84,7 @@ public class PDFController : Controller
         return File(
             memoryStream.ToArray(), 
             "application/pdf", 
-            $"{sheetDays[0].Date.ToString("MM/yy").Replace("/", "-")} .pdf");
+            $"{sheetDays[0].Date.ToString("MM/yy").Replace("/", "-")} {user.FullName()}.pdf"
+        );
     }
 }
